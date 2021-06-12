@@ -1,43 +1,22 @@
-// for menu mobile and desktop ---------------------------------------------------------->
+// scroll page
+var lastScrollTop = 0;
 $(function () {
-  $("#main-menu").smartmenus({
-    mainMenuSubOffsetX: -1,
-    mainMenuSubOffsetY: 4,
-    subMenusSubOffsetX: 6,
-    subMenusSubOffsetY: -6,
-  });
-});
-
-// SmartMenus CSS animated sub menus - toggle animation classes on sub menus show/hide
-$(function () {
-  $("#main-menu")
-    .bind({
-      "show.smapi": function (e, menu) {
-        $(menu).removeClass("hide-animation").addClass("show-animation");
-      },
-      "hide.smapi": function (e, menu) {
-        $(menu).removeClass("show-animation").addClass("hide-animation");
-      },
-    })
-    .on(
-      "animationend webkitAnimationEnd oanimationend MSAnimationEnd",
-      "ul",
-      function (e) {
-        $(this).removeClass("show-animation hide-animation");
-        e.stopPropagation();
-      }
-    );
-});
-
-// show and hide menu mobile
-$(function () {
-  $("#show-menu-mobile").click(function () {
-    if ($("#main-menu").css("left") == "-2000px") {
-      $("#main-menu").css("left", "0px");
+  // show and hide back to top button
+  $(window).scroll(function (event) {
+    let pos_body = $("html,body").scrollTop();
+    if (pos_body > 50) {
+      $("#to-top").css("display", "block");
     } else {
-      $("#main-menu").css("left", "-2000px");
+      $("#to-top").css("display", "none");
     }
   });
+  // event click back to top button
+  $("#to-top").on("click", function () {
+    $("html, body").animate(
+      {
+        scrollTop: 0,
+      },
+      200
+    );
+  });
 });
-
-// for another ---------------------------------------------------------->
